@@ -57,8 +57,8 @@ def bipartite(adj):
                 else:
                     bip_list[neighbour] = RED
             elif bip_list[neighbour] == bip_list[current_vertex]:
-                return 1
-    return 0
+                return 0
+    return 1
 
 if __name__ == '__main__':
     n, m = map(int, sys.stdin.readline().split())
