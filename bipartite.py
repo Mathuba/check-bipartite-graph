@@ -30,15 +30,41 @@ def add_edge(graph, vertex1, vertex2):
     
 
 def bipartite(adj):
-    #write your code here
-    return -1
+    """Determine if an undirected graph is bipartite.
+
+    Return 1 if the graph is bipartite or 0 if it isn't.
+
+    Parameters
+    ----------
+    adj: dictionary
+        The undirected graph to be checked if bipartite.
+    """
+    
+    RED = 'Red'
+    BLACK = 'Black'
+    bip_list = [None] * (len(adj) + 1)
+    q = deque()
+    start = 1
+
+    bip_list[start] = RED
+    q.append(start)
+    while q:
+        current_vertex = q.popleft()
+        for neighbour in adj[current_vertex]:
+            if bip_list[neighbour] is None:
+                if bip_list[current_vertex] == RED:
+                    bip_list[neighbour] = BLACK
+                else:
+                    bip_list[neighbour] = RED
+            elif bip_list[neighbour] == bip_list[current_vertex]:
+                return 1
+    return 0
 
 if __name__ == '__main__':
     n, m = map(int, sys.stdin.readline().split())
-    graph = {vertex: [] for vertex in range(1, n+1)}
+    adj = {vertex: [] for vertex in range(1, n+1)}
     for _ in range(m):
         vert1, vert2 = map(int, sys.stdin.readline().split())
-        add_edge(graph, vert1, vert2)
+        add_edge(adj, vert1, vert2)
 
-    # print(bipartite(adj))
-    print(graph)
+    print(bipartite(adj))
