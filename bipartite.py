@@ -48,6 +48,7 @@ def bipartite(adj):
     start = 1
 
     bip_list[start] = RED
+    visited[start] = True
     q.append(start)
     while q:
         current_vertex = q.popleft()
@@ -57,9 +58,10 @@ def bipartite(adj):
                     bip_list[neighbour] = BLACK
                 else:
                     bip_list[neighbour] = RED
+                q.append(neighbour)
             elif bip_list[neighbour] == bip_list[current_vertex]:
-                return 1
-    return 0
+                return 0
+    return 1
 
 if __name__ == '__main__':
     n, m = map(int, sys.stdin.readline().split())
