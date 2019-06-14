@@ -43,6 +43,7 @@ def bipartite(adj):
     RED = 'Red'
     BLACK = 'Black'
     bip_list = [None] * (len(adj) + 1)
+    visited = [None] * (len(adj) + 1)
     q = deque()
     start = 1
 
@@ -57,8 +58,8 @@ def bipartite(adj):
                 else:
                     bip_list[neighbour] = RED
             elif bip_list[neighbour] == bip_list[current_vertex]:
-                return 0
-    return 1
+                return 1
+    return 0
 
 if __name__ == '__main__':
     n, m = map(int, sys.stdin.readline().split())
